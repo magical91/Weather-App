@@ -1,0 +1,19 @@
+.hero {
+    padding-bottom: 1px;
+}
+
+.card-body {
+    border-bottom: 1px solid gray;
+}
+
+.btn {
+    border: 1px solid;
+}
+
+.form-input {
+    height: 2.3rem;
+}
+
+.hide {
+    display: none;
+}

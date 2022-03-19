@@ -12,24 +12,57 @@
 
 
 <body>
-    <header class="hero">
+    <header class="hero bg-secondary">
         <h1 class="text-center"><i class="fas fa-cloud-sun"></i>Weather Dashboard</h1>
     </header>
 
-    <main class="container col-12">
-        <div class="card col-3">
-            <div class="card col">
+    <main class="jumbotron d-flex">
+        <section class="col-3">
+            <div class="card">
                 <form class="card-body">
                     <label class="form-label">Search for a City:</label>
-                    <input class="form-input" />
-                    <button class="btn">Search</button>
+                    <input class="form-input w-100 mb-1" />
+                    <button class="btn bg-secondary font-weight-bold w-100">Search</button>
                 </form>
+                <div class="card search hide" id="recent-searches">
+                    <div class="card-header">
+                      Recent Searches
+                    </div>
+                    <ul class="list-group list-group-flush" id="recent-searches-list">
+                     </ul> 
+                     <button class="btn bg-secondary font-weight-bold mx-3">Clear History</button>
+                  </div>
             </div>
-        </div>
             
-        <div>
+            <div>
             
-        </div>
+            </div>
+        </section>
+
+        <section class="weather-info col-9 hide">
+            <div class="text-dark border border-dark" id="city-info">
+                <h2 class="display-5 mb-4 font-weight-bold"><span id="city-name"></span> <span id="date-today"></span> <img
+                      id="weather-icon" />Austin</h2>
+                <p class="lead">
+                    Temperature: <span id="temperature"></span id="temperature">
+                </p>
+                <p class="lead">
+                    Humidity: <span id="humidity"></span>
+                </p>
+                <p class="lead">
+                    Wind Speed: <span id="wind-speed"></span>
+                </p>
+                <p class="lead">
+                    UV Index: <span id="uv-index"></span>
+                </p>
+            </div>
+            <div id="forecast">
+                <h2 class="five-day font-weight-bold" id="forecast-title">5 Day Forecast: </h2>
+                <div class="row m-auto" id="forecast-week">
+                    
+                </div>
+            </div>
+        </section>
     </main>
 
     
