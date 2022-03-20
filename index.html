@@ -21,8 +21,8 @@
             <div class="card">
                 <form class="card-body">
                     <label class="form-label">Search for a City:</label>
-                    <input class="form-input w-100 mb-1" />
-                    <button class="btn bg-secondary font-weight-bold w-100">Search</button>
+                    <input class="form-input w-100 mb-1" id="searchedCity" />
+                    <button class="btn bg-secondary font-weight-bold w-100" id="searchBtn">Search</button>
                 </form>
                 <div class="card search hide" id="recent-searches">
                     <div class="card-header">
@@ -39,10 +39,10 @@
             </div>
         </section>
 
-        <section class="weather-info col-9 hide">
+        <section class="weather-info col-9 hide" id="weather-info">
             <div class="text-dark border border-dark" id="city-info">
                 <h2 class="display-5 mb-4 font-weight-bold"><span id="city-name"></span> <span id="date-today"></span> <img
-                      id="weather-icon" />Austin</h2>
+                      id="weather-icon" /></h2>
                 <p class="lead">
                     Temperature: <span id="temperature"></span id="temperature">
                 </p>
