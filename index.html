@@ -12,7 +12,7 @@
 
 
 <body>
-    <header class="hero bg-secondary">
+    <header class="hero bg-info">
         <h1 class="text-center"><i class="fas fa-cloud-sun"></i>Weather Dashboard</h1>
     </header>
 
@@ -22,7 +22,7 @@
                 <form class="card-body">
                     <label class="form-label">Search for a City:</label>
                     <input class="searched-city form-input w-100 mb-1" id="searchedCity" />
-                    <button class="search-btn btn bg-secondary font-weight-bold w-100" id="searchBtn">Search</button>
+                    <button class="search-btn btn bg-info font-weight-bold w-100" id="searchBtn">Search</button>
                 </form>
                 <div class="card search hide" id="recent-searches">
                     <div class="card-header">
@@ -30,7 +30,7 @@
                     </div>
                     <ul class="list-group list-group-flush" id="recent-searches-list">
                      </ul> 
-                     <button class="btn bg-secondary font-weight-bold mx-3">Clear History</button>
+                     <button class="btn bg-info font-weight-bold mx-3">Clear History</button>
                   </div>
             </div>
             
@@ -40,7 +40,7 @@
         </section>
 
         <section class="col-9 hide" id="weather-info">
-            <div class="text-dark bg-warning" id="city-info">
+            <div class="text-dark bg-light" id="city-info">
                 <div class="d-flex ">
                 <h2 class="city font-weight-bold"></h2>
                 <img class="icon" />
@@ -54,8 +54,8 @@
                 <p class="lead wind">
                     Wind Speed: <span id="wind-speed"></span>
                 </p>
-                <p class="lead index">
-                    UV Index: <span id="uv-index"></span>
+                <p class="lead">
+                    UV Index: <span class="index" id="uv-index"></span>
                 </p>
             </div>
             <div id="forecast">

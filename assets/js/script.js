@@ -21,7 +21,7 @@ let weather = {
         document.querySelector(".temp").innerText = "Temp: " + temp + "°F";
         document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
         document.querySelector(".wind").innerText = "Wind: " + speed + " mph";
-        fetchUVIndex(lat, lon)
+        this.fetchUVIndex(lat, lon)
     },
     "apiKey": "b41dfd6635a9cbc6a27f2bc778fcecf5",
     fetchUVIndex: function(lat, lon) {
@@ -31,10 +31,17 @@ let weather = {
     },
 
     displayUVIndex: function(data) {
-        const { uvi } = data.current;
-        // if (uvi <= 2.0) {
-        //     document.querySelector(".index").innerText = "UV Index: " + uvi;
-        // }
+        const { uvi } = data.current; console.log(uvi)
+        if (uvi <= 2.0) {
+            document.querySelector(".index").innerText = uvi;
+            document.querySelector(".index").classList = ("badge badge-success");
+        } else if (uvi > 2.0 && uvi <= 5.0) {
+            document.querySelector(".index").innerText = uvi;
+            document.querySelector(".index").classList = ("badge badge-warning");
+        } else if (uvi > 5.0 && uvi <= 10.0) {
+            document.querySelector(".index").innerText = uvi;
+            document.querySelector(".index").classList = ("badge badge-danger");
+        }
     },
 
     search: function() {
