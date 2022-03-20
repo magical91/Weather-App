@@ -14,6 +14,14 @@
     height: 2.3rem;
 }
 
+.lead, .city, .icon {
+    margin-left: 10px;
+}
+
+.city {
+    margin-top: 25px;
+}
+
 /* .hide {
     display: none;
 } */

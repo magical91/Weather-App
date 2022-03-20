@@ -21,8 +21,8 @@
             <div class="card">
                 <form class="card-body">
                     <label class="form-label">Search for a City:</label>
-                    <input class="form-input w-100 mb-1" id="searchedCity" />
-                    <button class="btn bg-secondary font-weight-bold w-100" id="searchBtn">Search</button>
+                    <input class="searched-city form-input w-100 mb-1" id="searchedCity" />
+                    <button class="search-btn btn bg-secondary font-weight-bold w-100" id="searchBtn">Search</button>
                 </form>
                 <div class="card search hide" id="recent-searches">
                     <div class="card-header">
@@ -39,20 +39,22 @@
             </div>
         </section>
 
-        <section class="weather-info col-9 hide" id="weather-info">
-            <div class="text-dark border border-dark" id="city-info">
-                <h2 class="display-5 mb-4 font-weight-bold"><span id="city-name"></span> <span id="date-today"></span> <img
-                      id="weather-icon" /></h2>
-                <p class="lead">
+        <section class="col-9 hide" id="weather-info">
+            <div class="text-dark bg-warning" id="city-info">
+                <div class="d-flex ">
+                <h2 class="city font-weight-bold"></h2>
+                <img class="icon" />
+                </div>
+                <p class="lead temp">
                     Temperature: <span id="temperature"></span id="temperature">
                 </p>
-                <p class="lead">
+                <p class="lead humidity">
                     Humidity: <span id="humidity"></span>
                 </p>
-                <p class="lead">
+                <p class="lead wind">
                     Wind Speed: <span id="wind-speed"></span>
                 </p>
-                <p class="lead">
+                <p class="lead index">
                     UV Index: <span id="uv-index"></span>
                 </p>
             </div>
