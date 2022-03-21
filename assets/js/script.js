@@ -2,14 +2,17 @@ $("#weather-info").hide();
 $("#recent-searches").hide();
 var currentDate = moment().format('L');
 
-
+// display weather code
 let weather = {
     "apiKey": "b41dfd6635a9cbc6a27f2bc778fcecf5",
+    // look up city by name
     fetchWeather: function(city) {
         fetch("https://api.openweathermap.org/data/2.5/weather?q=" 
         + city + "&units=imperial&appid=" 
         + this.apiKey
         )
+
+    
         .then((response) => response.json())
         .then((data) => this.displayWeather(data));
     },
@@ -57,16 +60,22 @@ let weather = {
 
     "apiKey": "17ff6c9a0c05f29340ecc08ff3599a7e",
     fetchWeekForecast: function(id) {
-        fetch("http://api.openweathermap.org/data/2.5/forecast?id=" + id + "&cnt=5&units=imperial&appid=" + this.apiKey)
+        fetch("http://api.openweathermap.org/data/2.5/forecast?id=" 
+        + id 
+        + "&units=imperial&appid=" 
+        + this.apiKey
+        )
         .then((response) => response.json())
-        .then((data) => this.displayWeekForecast(data));
+        .then((data) => {
+            let fiveDayData = [data.list[5], data.list[13], data.list[21], data.list[29], data.list[38]]
+            this.displayWeekForecast(fiveDayData)});
     },
 
     displayWeekForecast: function(data) {
         var cardHTML = "";
-        for (var i = 0; i < data.list.length; i++) {
-            var weatherIcon = data.list[i].weather[0].icon;console.log(dateStrArr)
-		    var dateStr = data.list[i].dt_txt;console.log(dateStr)
+        for (var i = 0; i < data.length; i++) {
+            var weatherIcon = data[i].weather[0].icon;
+		    var dateStr = data[i].dt_txt;
 		    var dateStrArr = dateStr.split(" ");
 		    var date = dateStrArr[0];
 		    var dateArr = date.split("-");
@@ -79,13 +88,13 @@ let weather = {
 					        <img id="weather-icon" src="https://openweathermap.org/img/wn/${weatherIcon}.png"/>
 				        </p>
 				        <p class="card-text">
-					        Temp: ${data.list[i].main.temp} °F
+					        Temp: ${data[i].main.temp} °F
 				        </p>
                         <p class="card-text">
-                            Wind: ${data.list[i].wind.speed} MPH
+                            Wind: ${data[i].wind.speed} MPH
                         </p>
 				        <p class="card-text">
-					        Humidity: ${data.list[i].main.humidity}%
+					        Humidity: ${data[i].main.humidity}%
 				        </p>
 				    </div>
 			    </div>`;
@@ -96,6 +105,26 @@ let weather = {
 
     search: function() {
         this.fetchWeather(document.querySelector(".searched-city").value);
+        this.fetchWeather($(".searched-city").val())
+    },
+
+    var: cities = [],
+
+    recentSearches: function(city) {
+        var listGroupEl = document.querySelector(".list-group");console.log(listGroupEl)
+        var listItemEl = document.createElement("li");
+        listItemEl.className = "list-group-item";
+        listItemEl.innerText = city;
+
+        document.querySelector(".list-group").prepend(listItemEl);
+
+        var cityObj = {
+            city: city
+        };
+
+        cities.push(cityObj);
+
+        localStorage.setItem("searches", JSON.stringify(cities));
     },
 };
 
@@ -109,6 +138,8 @@ document.querySelector(".search-btn").addEventListener("click", function(event) 
     $("#recent-searches").show();
     weather.search();
 });
+
+
 
 
 
