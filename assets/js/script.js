@@ -11,11 +11,10 @@ let weather = {
         + city + "&units=imperial&appid=" 
         + this.apiKey
         )
-
-    
         .then((response) => response.json())
         .then((data) => this.displayWeather(data));
     },
+    
     displayWeather: function(data) {
         const { name } = data;
         const { icon } = data.weather[0];
@@ -30,7 +29,9 @@ let weather = {
         document.querySelector(".wind").innerText = "Wind: " + speed + " MPH";
         this.fetchUVIndex(lat, lon)
         this.fetchWeekForecast(id)
+        
     },
+
     "apiKey": "dabd7c25e91b1eb7eb72fee9a490fe03",
     fetchUVIndex: function(lat, lon) {
         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" 
@@ -105,13 +106,14 @@ let weather = {
 
     search: function() {
         this.fetchWeather(document.querySelector(".searched-city").value);
-        this.fetchWeather($(".searched-city").val())
+        this.recentSearches(document.querySelector(".searched-city").value);
     },
+
+
 
     var: cities = [],
 
     recentSearches: function(city) {
-        var listGroupEl = document.querySelector(".list-group");console.log(listGroupEl)
         var listItemEl = document.createElement("li");
         listItemEl.className = "list-group-item";
         listItemEl.innerText = city;
@@ -123,9 +125,27 @@ let weather = {
         };
 
         cities.push(cityObj);
-
+        
         localStorage.setItem("searches", JSON.stringify(cities));
     },
+
+    getRecentSearches: function() {
+        var searches = JSON.parse(localStorage.getItem("searches"));
+        if (searches != null) {
+            for (var i = 0; i < searches.length; i++) {
+                // create element
+                var newCity = document.createElement("li");
+                newCity.className = "list-group-item";
+                newCity.innerText = searches[i].city;
+
+                // append to list
+                document.querySelector(".list-group").prepend(newCity);
+            }
+            $("#recent-searches").show();
+        }   else {
+            $("#recent-searches").hide();
+        }
+    }
 };
 
 
@@ -142,6 +162,8 @@ document.querySelector(".search-btn").addEventListener("click", function(event) 
 
 
 
-
+document.querySelector("#clearBtn").addEventListener("click", function() {
+    $("#recent-searches-list").empty();
+});
 
 
