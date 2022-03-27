@@ -4,6 +4,7 @@ var currentDate = moment().format('L');
 
 // display weather code
 let weather = {
+    // api for getting weather by name
     "apiKey": "b41dfd6635a9cbc6a27f2bc778fcecf5",
     // look up city by name
     fetchWeather: function(city) {
@@ -15,6 +16,7 @@ let weather = {
         .then((data) => this.displayWeather(data));
     },
     
+    // method to display the weather by looking up the data from the api
     displayWeather: function(data) {
         const { name } = data;
         const { icon } = data.weather[0];
@@ -32,6 +34,7 @@ let weather = {
         
     },
 
+    // api for getting uv index by latitude and longitude
     "apiKey": "dabd7c25e91b1eb7eb72fee9a490fe03",
     fetchUVIndex: function(lat, lon) {
         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" 
@@ -45,20 +48,25 @@ let weather = {
         .then((data) => this.displayUVIndex(data));
     },
 
+    // method to display uv index
     displayUVIndex: function(data) {
         const { uvi } = data.current;
+        // if uv index less than 2.0 display green background color
         if (uvi <= 2.0) {
             document.querySelector(".index").innerText = uvi;
             document.querySelector(".index").classList = ("badge badge-success");
+            // if uv index more than 2.0 and less than 5.0 display yellow background color
         } else if (uvi > 2.0 && uvi <= 5.0) {
             document.querySelector(".index").innerText = uvi;
             document.querySelector(".index").classList = ("badge badge-warning");
+            // if uv index more than 5.0 and less than 10.0 display red background color
         } else if (uvi > 5.0 && uvi <= 10.0) {
             document.querySelector(".index").innerText = uvi;
             document.querySelector(".index").classList = ("badge badge-danger");
         }
     },
 
+    // api key to get 5 day forecast using city ID
     "apiKey": "17ff6c9a0c05f29340ecc08ff3599a7e",
     fetchWeekForecast: function(id) {
         fetch("http://api.openweathermap.org/data/2.5/forecast?id=" 
@@ -72,6 +80,7 @@ let weather = {
             this.displayWeekForecast(fiveDayData)});
     },
 
+    // method to display the forecast for the next 5 days
     displayWeekForecast: function(data) {
         var cardHTML = "";
         for (var i = 0; i < data.length; i++) {
@@ -104,6 +113,7 @@ let weather = {
         }
     },
 
+    // method to fetch weather and recent searches
     search: function() {
         this.fetchWeather(document.querySelector(".searched-city").value);
         this.recentSearches(document.querySelector(".searched-city").value);
@@ -113,6 +123,7 @@ let weather = {
 
     var: cities = [],
 
+    // method to display the recent searches
     recentSearches: function(city) {
         var listItemEl = document.createElement("li");
         listItemEl.className = "list-group-item";
@@ -126,6 +137,7 @@ let weather = {
 
         cities.push(cityObj);
         
+        // store searches data in localStorage
         localStorage.setItem("searches", JSON.stringify(cities));
     },
 
@@ -151,7 +163,7 @@ let weather = {
 
 
 
-
+// event listener to search for desired city
 document.querySelector(".search-btn").addEventListener("click", function(event) {
     event.preventDefault();
     $("#weather-info").show();
@@ -161,7 +173,7 @@ document.querySelector(".search-btn").addEventListener("click", function(event) 
 
 
 
-
+// click event for clearing the recent searches
 document.querySelector("#clearBtn").addEventListener("click", function() {
     $("#recent-searches-list").empty();
 });
